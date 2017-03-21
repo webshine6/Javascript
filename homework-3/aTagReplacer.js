@@ -1,8 +1,24 @@
+/**
+ * Replace a tag - variant I
+ * @param str
+ * @returns {XML|void|string}
+ */
+function replaceATag(str) {
+    var objMatch = {
+        '<a' : '[URL',
+        '">'  : ']',
+        '"'   : '',
+        '</a>' : '[/URL]'
+    };
 
-// function replaceATag(str) {
-//
-// }
+    var strRes = str.replace(/(<a)|(">)|(<\/a>)|"/g, function (match) {
+        return objMatch[match];
+    });
 
+    return strRes;
+}
+
+// test input
 var str = '<ul>' +
     '<li>' +
         '<a href="http://softuni.bg">SoftUni' +
@@ -10,23 +26,14 @@ var str = '<ul>' +
     '</li>' +
     '</ul>';
 
+// test output
+console.log(replaceATag(str));
 
-// variant I
-
-var objMatch = {
-    '<a' : '[URL',
-    '">'  : ']',
-    '"'   : '',
-    '</a>' : '[/URL]'
-};
-
-var strRes = str.replace(/(<a)|(">)|(<\/a>)|"/g, function (match) {
-    return objMatch[match];
-});
-
-console.log(strRes);
-
-// variant II
+/**
+ * variant II
+ * @param str
+ * @returns {XML|string}
+ */
 
 var replaceATag = function(str) {
     return str
@@ -36,5 +43,6 @@ var replaceATag = function(str) {
         .replace(/"/g, '');
 };
 
+// test output
 //var res = replaceATag(str);
 //console.log(res);
